@@ -7,6 +7,7 @@ import { SanityAssetDocument } from '@sanity/client'
 
 import useAuthStore from '../store/authStore'
 import { client } from '../utils/client'
+import { topics } from '../utils/constants'
 
 const Upload = () => {
 
@@ -14,10 +15,14 @@ const Upload = () => {
     const [videoAsset, setVideoAsset] = useState<SanityAssetDocument | undefined>()
     const [wrongFileType, setWrongFileType] = useState(false)
 
+    //the Event is from onChange={uploadVideo} in <input>
     const uploadVideo = async (e: any) => {
+        //Take the file.
         const selectedFile = e.target.files[0]
+        //List file types that we'll accept.
         const fileTypes = ['video/mp4', 'video/webm', 'video/ogg']
 
+        //If accepted file type matches uploaded file type do the upload.
         if(fileTypes.includes(selectedFile.type)) {
             client.assets.upload('file', selectedFile, {
                 contentType: selectedFile.type,
@@ -34,25 +39,37 @@ const Upload = () => {
     }
 
   return (
-    <div className='flex w-full h-full'>
-        <div className='bg-white rounded-lg'>
+    <div className='flex w-full h-full absolute left-0 top-[60px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center'>
+        <div className='bg-white rounded-lg xl:h-[80vh] lg:w-[60%] md:w-[75%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6'>
             <div>
+                {/** Header text. */}
                 <div>
                     <p className='text-2xl font-bold'>
                         Upload Video</p>
                     <p className='text-md text-gray-400 mt-1'>
                         Post a video to your account</p>
                 </div>
+
+                {/** If loading, show loading. */}
                 <div className='border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-[460px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100'>
                     {isLoading ? (
                         <p>Uploading...</p>
                     ) : (
+                        //If not loading, show video if it's uploaded.
                         <div>
                             {videoAsset ? (
                                 <div>
+                                    <video
+                                        src={videoAsset.url}
+                                        loop
+                                        controls
+                                        className='rounded-xl h-[450px] mt-16 bg-black'
+                                    >
 
+                                    </video>
                                 </div>
                             ) : (
+                                //If video is not uploaded, show the upload label.
                                 <label className='cursor-pointer'>
                                     <div className='flex flex-col items-center justify-center h-full'>
                                         <div className='flex flex-col items-center justify-center'>
@@ -77,13 +94,67 @@ const Upload = () => {
                                         type='file'
                                         name='upload-video'
                                         className='w-0 h-0'
+                                        //If we're getting event no need for it, just the state will do.
                                         onChange={uploadVideo}
                                     />
                                 </label>
                             )}
                         </div>
                     )}
+                    {wrongFileType && (
+                        <p className='text-center text-xl text-red-400 font-semibold mt-4 w-[250px]'
+                        >Please select a video file.</p>
+                    )}
                 </div>
+            </div>
+            {/** Form. */}
+            <div className='flex flex-col gap-3 pb-10'>
+
+                {/** Caption. */}
+                <label className='text-md font-medium'>
+                Caption</label>
+                <input
+                    type='text'
+                    value=''
+                    onChange={() => {}}
+                    className='rounded outline-none text-md border-2 border-gray-200 p-2'
+                />
+
+                {/** Categories. */}
+                <label className='text-md font-medium'>
+                Choose a Category</label>
+                <select
+                    onChange={() => {}}
+                    className='outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer'
+                >
+                    {topics.map((topic) => (
+                        <option
+                            key={topic.name}
+                            className='outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300'
+                            value={topic.name}
+                        >
+                            {topic.name}
+                        </option>
+                    ))}
+                </select>
+
+                <div className='flex gap-6 mt-10'>
+                    <button
+                        onClick={() => {}}
+                        type='button'
+                        className='border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none'
+                    >
+                        Discard
+                    </button>
+                    <button
+                        onClick={() => {}}
+                        type='button'
+                        className='bg-[#F51997] text-white border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none'
+                    >
+                        Post
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
