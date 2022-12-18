@@ -1,6 +1,8 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
 //Creates or gets user from Sanity database.
 //Second param is for Zustand.
 export const createOrGetUser = async (response: any, addUser: any) => {
@@ -19,5 +21,5 @@ export const createOrGetUser = async (response: any, addUser: any) => {
   addUser(user)
 
   //Post results from Google loging to Sanity.
-  await axios.post(`http://localhost:3000/api/auth`, user)
+  await axios.post(`${BASE_URL}/api/auth`, user)
 }
