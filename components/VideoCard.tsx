@@ -71,20 +71,20 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
         <div onMouseEnter={() => setIsHover(true)}
              onMouseLeave={() => setIsHover(false)}
              className='rounded-3xl'>
-          <Link href='/' >
+          <Link href={`/detail/${post._id}`} >
             <video
               src={post.video.asset.url}
               loop
               //Use this video tag as a reference for onVideoPress function.
               ref={videoRef}
-              className='lg:w[600px] h-[300px] md:h-[400px] lg:h-[530px] rounded-2xl cursor-pointer bg-gray-100'
+              className='lg:w-[600px] h-[300px] md:h-[400px] lg:h-[530px] rounded-2xl cursor-pointer bg-gray-100'
             >
             </video>
           </Link>
 
           {/** On hover show video options. */}
           {isHover && (
-            <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] p-3'>
+            <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[600px] p-3'>
               {/** Play/Pause buttons. */}
               {playing ? (
                 <button onClick={onVideoPress}>
