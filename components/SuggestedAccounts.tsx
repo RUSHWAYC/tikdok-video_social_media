@@ -25,12 +25,13 @@ const SuggestedAccounts = () => {
           >
             <div className='flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded'>
               <div className='w-8 h-8'>
-                <img
+                <Image
                   src={user.image}
                   width={34}
                   height={34}
                   className='rounded-full'
                   alt='user profile'
+                  layout='responsive'
                 />
               </div>
               <div className='hidden xl:block'>
