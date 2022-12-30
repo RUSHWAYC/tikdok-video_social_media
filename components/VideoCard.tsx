@@ -43,7 +43,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
         <div className='flex gap-3 p-2 cursor-pointer font-semibold rounded'>
           {/** Profile picture on the post. */}
           <div className='md:w-16 md:h-16 w-10 h-10'>
-            <Link href={`/profile/${post.postedBy._id}`} >
+            <Link href={`api/profile/${post.postedBy._id}`} >
               <>
                 <Image
                   width={62}
