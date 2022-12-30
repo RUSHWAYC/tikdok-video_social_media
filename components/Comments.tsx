@@ -37,7 +37,7 @@ const Comments = ({ comment, setComment, addComment, comments, isPostingComment 
                 user._id === (item.postedBy._id || item.postedBy._ref) && (
                   <div className='p-2 item center' key={idx}>
                     <Link href={`/profile/${user._id}`}>
-                      <div className='flex items-start gap-3'>
+                      <div className='flex items-start gap-3 cursor-pointer'>
                         {/** User image. */}
                         <div className='w-8 h-8'>
                           <Image
@@ -51,7 +51,7 @@ const Comments = ({ comment, setComment, addComment, comments, isPostingComment 
                         </div>
                         {/** Username. */}
                         <div className='hidden xl:block'>
-                          <p className='flex gap-1 items-center text-md font-bold text-primary lowercase'>
+                          <p className='flex gap-1 items-center text-md font-bold text-primary lowercase cursor-pointer'>
                             {user.userName.replace(' ', '')}<GoVerified className='text-blue-400' />
                           </p>
                           <p className='capitalize text-gray-400 text-xs'>{user.userName}</p>
@@ -78,7 +78,7 @@ const Comments = ({ comment, setComment, addComment, comments, isPostingComment 
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder='Add comment...'
-              className='bg-primary px-6 py-4 text-medium font-medium border-2 w-[250px] md:w-[700px] lg:w-[350px] border-gray-100 focus:outline-none focuse:border-2 focuse:border-gray-300 flex-1 rounded-lg'  
+              className='bg-primary px-6 py-4 text-medium font-medium border-2 w-[350px] sm:w-[500px] md:w-[700px] lg:w-[350px] border-gray-100 focus:outline-none focuse:border-2 focuse:border-gray-300 flex-1 rounded-lg'  
             />
             <button
               className='text-md text-gray-400'

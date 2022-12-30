@@ -83,33 +83,32 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
               loop
               //Use this video tag as a reference for onVideoPress function.
               ref={videoRef}
-              className='lg:w-[600px] h-[300px] md:h-[400px] lg:h-[530px] rounded-2xl cursor-pointer bg-gray-100'
-            >
+              className='lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[400px] rounded-2xl cursor-pointer bg-gray-100'>
             </video>
           </Link>
 
           {/** On hover show video options. */}
           {isHover && (
-            <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[600px] p-3'>
+            <div className='absolute bottom-6 cursor-pointer left-4 md:left-7 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[100px] p-3'>
               {/** Play/Pause buttons. */}
               {playing ? (
                 <button onClick={onVideoPress}>
-                  <BsFillPauseFill className='text-black text-2xl lg:text-4xl' />
+                  <BsFillPauseFill className='text-black text-3xl md:text-4xl lg:text-4xl' />
                 </button>
               ) : (
                 <button onClick={onVideoPress}>
-                  <BsFillPlayFill className='text-black text-2xl lg:text-4xl' />
+                  <BsFillPlayFill className='text-black text-3xl md:text-4xl lg:text-4xl' />
                 </button>
               )}
 
               {/** Mute/Unmute video. */}
               {isVideoMuted ? (
                 <button onClick={() => setIsVideoMuted(false)} >
-                  <HiVolumeOff className='text-black text-2xl lg:text-4xl' />
+                  <HiVolumeOff className='text-black text-2xl md:text-4xl lg:text-4xl' />
                 </button>
               ) : (
                 <button onClick={() => setIsVideoMuted(true)} >
-                  <HiVolumeUp className='text-black text-2xl lg:text-4xl' />
+                  <HiVolumeUp className='text-black text-2xl md:text-4xl lg:text-4xl' />
                 </button>
               )}
             </div>

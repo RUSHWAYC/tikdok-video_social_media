@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
@@ -16,8 +16,14 @@ const Navbar = () => {
   //From zustand in ../store/authStore.ts
   const { userProfile, addUser } = useAuthStore()
 
-  const handleSearch = () => {
+  const [searchValue, setSearchValue] = useState('')
+  const router = useRouter()
 
+  const handleSearch = (e: {preventDefault: () => void }) => {
+    e.preventDefault()
+    if(searchValue) {
+      router.push(`/search/${searchValue}`)
+    }
   }
 
   return (
@@ -41,8 +47,8 @@ const Navbar = () => {
         >
           <input
             type='text'
-            value=''
-            onChange={() => {}}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             placeholder='Search accounts and videos'
             className='bg-primary p-3 md:text-md font-medium border-2 border-gray-100 focus:outline-none focuse:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full md:top-0'
           />
